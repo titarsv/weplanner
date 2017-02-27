@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>We Planner</title>	
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/jquery.bootgrid.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="wrapper my-budget">
+		<header class="main-header white fixed">
+			<div class="flex-container">
+				<div class="logo">
+					<a href="#">
+						<img src="img/logo-black.png" alt="logo">
+					</a>
+				</div>
+				<nav>
+					<ul class="main-nav">
+						<li>
+							<a href="#">About</a>
+						</li>
+						<li class="active">
+							<a href="#">Catalog</a>
+						</li>
+						<li>
+							<a href="#">Ideas</a>
+						</li>
+						<li>
+							<a href="#">News</a>
+						</li>
+						<li>
+							<a href="#">Contacts</a>
+						</li>
+					</ul>
+				</nav>
+				<ul class="profile">
+					<li class="lang">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        	En
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">En</a>
+                            </li>
+                            <li>
+                                <a href="#">Ru</a>
+                            </li>
+                        </ul>
+                    </li>
+					<li class="login">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="login-icon"></span>
+							Login
+						</a>
+						<ul class="dropdown-menu">
+                            <form action="#" class="login-form">
+                            	<input type="text" class="login op-place" placeholder="Your email or login">
+                            	<input type="text" class="password op-place" placeholder="Your password">
+                            	<button class="btn login-btn">Log In</button>
+                            		<a href="#">Forgot you password?</a>
+                            	<hr>
+                            	<p>Don’t have an account?</p>
+                            	<button class="btn reg-btn">Register!</button>
+                            </form>
+                        </ul>
+					</li>
+				</ul>
+			</div>
+		</header>		
+		<section id="search-prov" class="search-prov">
+			<h2>To start adding providers to your Budget please fill up fields below</h2>
+			<div class="container-custom">
+				<div class="filter-menu-btn">
+					<a href="#"></a>
+				</div>
+				<div class="search-filter dropdown city">
+					<a data-toggle="dropdown" href="#">Kyiv, Ukraine</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#">Kharkov</a></li>
+						<li><a href="#">Kiev</a></li>
+					</ul>
+				</div>
+				<div class="search-filter dropdown looking">
+					<a data-toggle="dropdown" href="#">Wedding</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#">Who are you looking for?</a></li>
+						<li><a href="#">Who are you looking for?</a></li>
+						<li><a href="#">Who are you looking for?</a></li>
+					</ul>
+				</div>
+				<div class="search-filter dropdown you-event">
+					<a data-toggle="dropdown" href="#">12/12/2016</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#">12/12/2016</a></li>
+						<li><a href="#">12/12/2016</a></li>
+						<li><a href="#">12/12/2016</a></li>
+					</ul>
+				</div>
+				<div class="search-filter dropdown date">
+					<a data-toggle="dropdown" href="#">60-90</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#">60-90</a></li>
+						<li><a href="#">60-90</a></li>
+						<li><a href="#">60-90</a></li>
+					</ul>
+				</div>
+				<div class="search">
+					<a href="#">Save</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+		<section class="budget-calc">
+			<div class="container-custom">
+				<table id="grid-basic" class="table table-condensed table-hover" aria-busy="false">
+				    <thead>
+				        <tr>				        	
+				            <th data-column-id="category">Category</th>
+				            <th data-column-id="est-cost">Estimated Cost</th>
+				            <th data-column-id="act-cost">Actual Cost</th>
+				            <th data-column-id="paid">Amount Paid</th>
+				            <th data-column-id="due">Amount Due</th>
+				            <th data-column-id="commands" data-formatter="commands"></th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+				            <td>Video</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Presenters</td>
+				            <td>$ 300</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 300</td>
+				        </tr>
+				        <tr>
+				            <td>Venues</td>
+				            <td>$ 300</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 300</td>
+				        </tr>
+				        <tr>
+				            <td>Technical support</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Music program</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Show program</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Souvenirs</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Audio</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Jewelery</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Artists</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Transport</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Rent</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Staff</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Design & Decor</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>DJ</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Cakes and confectioner</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Men's Clothing</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Clothing accessories</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Beauty and Health</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Dance program</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Photography</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Catering</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				        <tr>
+				            <td>Other</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				            <td>$ 0</td>
+				        </tr>
+				    </tbody>
+				    <tfoot>
+				    	<tr>
+				    		<tf></tf>
+				    		<tf></tf>
+				    		<tf></tf>
+				    		<tf></tf>
+				    		<tf></tf>
+				    	</tr>
+				    </tfoot>
+				</table>
+			</div>
+		</section>
+	</div>
+	<footer class="footer">
+		<div class="container-custom">
+			<div class="left-block">
+				<div class="logo pull-left">
+					<a href="#">
+						<img src="img/logo-black.png" alt="logo">
+					</a>
+				</div>
+				<ul class="social black pull-right">
+					<li><a class="fb" href="#"></a></li>
+					<li><a class="vk" href="#"></a></li>
+					<li><a class="in" href="#"></a></li>
+					<li><a class="insta" href="#"></a></li>
+					<li><a class="pt" href="#"></a></li>
+				</ul>
+				<div class="clear"></div>
+				<p>Nulla sit amet mollis odio, vitae sodales diam. Suspendisse vehicula sapien ut pellentesque suscipit. Nullam eleifend efficitur nunc sit amet porttitor. Mauris eu nisl gravida, interdum lorem ut, finibus mi. Donec enim quam, ullamcorper at nisl a, congue dignissim nisi. Etiam condimentum ultrices orci vel volutpat.</p>
+				<div class="copy">Wedding &amp; EventPlanner.com Copyright &copy; 2015</div>
+			</div>
+			<div class="right-block">
+				<ul class="footer-nav">
+					<li>
+						<a href="#">HELP &amp; RULES</a>
+					</li>
+					<li>
+						<a href="#">ADVERTISERS</a>
+					</li>
+					<li>
+						<a href="#">ABOUT US</a>
+					</li>
+					<li>
+						<a href="#">FEEDBACK</a>
+					</li>
+					<li>
+						<a href="#">CONTACTS</a>
+					</li>
+				</ul>
+				<form action="#" class="subscribe-form">					
+					<input type="email" name="email" class="email op-place" placeholder="Please enter your e-mail">					
+					<div class="subscribe-btn">
+						<input type="submit" value="Subscribe">
+					</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</footer>	
+	<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="js/jquery.bootgrid.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bootgrid.fa.min.js"></script>
+	<script>
+		$( document ).ready(function() {
+		    $("#grid-basic").bootgrid({
+		    	navigation: 0,
+		    	rowCount: -1,
+		    	formatters: {
+			        "commands": function (column, row)
+			        {
+			            return "<span class=\"expand\"></span>";
+			        }
+			    }
+			});
+		});		
+	</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: http://vagro.imsmedia.net.ua/sitemap.xml
