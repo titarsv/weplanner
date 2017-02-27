@@ -9,11 +9,10 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Illuminate\Support\Facades\Cache;
 
 use App\Models\Setting;
-use App\Models\Wishlist;
 use App\Models\User;
 use App\Models\Review;
-use App\Models\Image;
-use App\Models\Term;
+use App\Models\Album;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,78 +73,22 @@ class AppServiceProvider extends ServiceProvider
          * Категории
          */
         view()->composer(['public.layouts.categories'], function($view){
-            $terms = new Term();
+            $categories = new Category();
             $view->with([
-                'categories' => $terms->get_parent_categories()
+                'categories' => $categories->get_parent_categories()
             ]);
         });
 
         /**
-         * Категории в боковом меню
+         * Последние портфолио
          */
-        view()->composer([
-            'public.layouts.sidebar-menu',
-        ], function($view) use ($settings, $user) {
-            $categories = Category::where('status', 1)->where('parent_id', 0)->get();
+        view()->composer(['public.layouts.providers_portfolio'], function($view){
+            $albums = new Album();
             $view->with([
-                'root_categories' => $categories,
+                'posts' => $albums->get_portfolios()
             ]);
         });
 
-        /**
-         * Рекомендуемые новости
-         */
-        view()->composer(['public.layouts.recommended-news'], function($view){
-            $view->with([
-                'recommended' => Article::where('published', 1)->orderBy('visits', 'desc')->take(2)->get()
-            ]);
-        });
-
-        /**
-         * Выбранный город
-         */
-        view()->composer(['public.layouts.header-main', 'public.layouts.footer', 'public.product'], function($view){
-            $view->with([
-                'selected_city' => !empty($_COOKIE['selected_city']) ? $_COOKIE['selected_city'] : 'Харьков',
-                'branches' => ['Харьков', 'Киев', 'Одесса', 'Днепр']
-            ]);
-        });
-
-        /**
-         * Модуль баннерров
-         */
-        view()->composer(['public.layouts.sidebar-banners'], function($view){
-            $banners_settings = Module::select(['settings', 'status'])->where('alias_name', 'banners')->first();
-            $banners = [];
-            if($banners_settings->status){
-                $settings = json_decode($banners_settings->settings, true);
-                if(isset($settings['banners'])) {
-                    $banners = $settings['banners'];
-                    foreach ($banners as $id => $banner){
-                        $image = new Image();
-                        $banners[$id]['image'] = $image->get_file_url((int)$banner['image_id'], 'slide');
-                    }
-                }
-            }
-            $view->with([
-                'banners' => $banners
-            ]);
-        });
-
-        /**
-         * Последние отзывы
-         */
-        view()->composer(['public.layouts.last-reviews'], function($view){
-            $reviews = new Review();
-            $view->with([
-                'reviews' => $reviews->where('published', 1)
-                    ->take(2)
-                    ->orderBy('id', 'desc')
-                    ->groupBy('product_id')
-                    ->with('product.image', 'user')
-                    ->get()
-            ]);
-        });
     }
 
     /**

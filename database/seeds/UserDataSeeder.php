@@ -32,6 +32,11 @@ class UserDataSeeder extends Seeder
                 'image_id'  => 1,
                 'subscribe' => 1
             ],
+            [
+                'user_id'   => 5,
+                'image_id'  => 1,
+                'subscribe' => 1
+            ],
         ]);
     }
 }

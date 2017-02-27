@@ -33,11 +33,20 @@ class SentinelUsersTableSeeder extends Seeder {
                 'user' => true,
             ]
         ]);
+
         $unRegUserRole = Sentinel::getRoleRepository()->createModel()->create([
             'name' => 'UnRegisterUser',
             'slug' => 'unregister_user',
             'permissions' => [
                 'unregister_user' => true,
+            ]
+        ]);
+
+        $contributorUserRole = Sentinel::getRoleRepository()->createModel()->create([
+            'name' => 'Contributor',
+            'slug' => 'contributor',
+            'permissions' => [
+                'contributor' => true
             ]
         ]);
 
@@ -75,6 +84,7 @@ class SentinelUsersTableSeeder extends Seeder {
                 'last_name'  => 'Иванов'
             ]
         ];
+
         $unRegusers = [
             [
                 'email'    => 'unReguser1@laravel.com',
@@ -83,6 +93,19 @@ class SentinelUsersTableSeeder extends Seeder {
                 'permissions' => [
                     'unregistered' => true
                 ]
+            ]
+        ];
+
+        $contributors = [
+            [
+                'email'    => 'contributor1@laravel.com',
+                'phone'    => '+38 (050) 000-00-02',
+                'password' => 'pass',
+                'permissions' => [
+                    'contributor' => true
+                ],
+                'first_name' => 'Иван',
+                'last_name'  => 'Иванов'
             ]
         ];
 
@@ -96,6 +119,10 @@ class SentinelUsersTableSeeder extends Seeder {
         foreach ($unRegusers as $user)
         {
             $unRegUserRole->users()->attach(Sentinel::registerAndActivate($user));
+        }
+        foreach ($contributors as $user)
+        {
+            $contributorUserRole->users()->attach(Sentinel::registerAndActivate($user));
         }
     }
 }

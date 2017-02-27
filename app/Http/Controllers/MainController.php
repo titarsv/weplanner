@@ -6,17 +6,12 @@ use App\Models\User;
 
 class MainController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
-        $user = User::where('id', 1)->first();
-
-        //dd($user->categories[0]->users);
-
-        return view('index', [
+         return view('index', [
             'partition' => 'home',
-            'popular' => [],
-            'providers' => [],
+            'popular' => $user->get_popular_contractors(),
+            'providers' => $user->get_new_contractors()
         ]);
     }
-
 }

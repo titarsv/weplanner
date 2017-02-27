@@ -19,6 +19,7 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
         'phone',
         'password',
     ];
+
     /**
      * Array of login column names.
      *
@@ -59,7 +60,15 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
     }
 
     public function attributes(){
-        return $this->belongsToMany('App\Models\AttributeValue', 'user_attributes', 'user_id', 'attribute_value_id');
+        return $this->belongsToMany('App\Models\AttributeValue', 'user_attributes', 'user_id', 'attribute_value_id')->withPivot('price');
+    }
+
+    public function albums(){
+        return $this->hasMany('App\Models\Album');
+    }
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
     }
 
     /**
@@ -94,27 +103,34 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
      */
     public function get_popular_contractors()
 	{
-	    $contractors = $this->select([
-	        'users.id',
-            'users.avatar',
-            'users.first_name',
-            'users.last_name',
-            'users.city',
-            'users_data.rating',
-            'users_data.price',
-            'users_data.cur',
-            'users_data.category',
-            'users_data.profession',
-            'users_data.page_brief',
-            'terms.name',
-            'terms.name_en'
-        ]);
-
-        $contractors->join('personal_pages', 'users.id', '=', 'personal_pages.user_id')
-            ->join('terms', 'personal_pages.category', '=', 'terms.term_id')
-            ->order_by('users.rating', 'desc')
-            ->paginate(12);
+        $contractors = $this->join('users_data', 'users.id', '=', 'users_data.user_id')
+            ->join('role_users', function ($join) {
+                $join->on('users.id', '=', 'role_users.user_id')
+                    ->whereIn('role_users.role_id', [5]);
+            })
+            ->orderBy('users_data.rating', 'desc')
+            ->take(12)
+            ->get();
 
 		return $contractors;
 	}
+
+    /**
+     * Получить новых подрядчиков
+     *
+     * @return mixed
+     */
+    public function get_new_contractors()
+    {
+        $contractors = $this->join('users_data', 'users.id', '=', 'users_data.user_id')
+            ->join('role_users', function ($join) {
+                $join->on('users.id', '=', 'role_users.user_id')
+                    ->whereIn('role_users.role_id', [5]);
+            })
+            ->orderBy('users.id', 'desc')
+            ->take(12)
+            ->get();
+
+        return $contractors;
+    }
 }
