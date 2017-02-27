@@ -15,7 +15,6 @@ class CreateUsersDataTable extends Migration
         Schema::create('users_data', function(Blueprint $table){
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('image_id');
             $table->text('address')->nullable();
             $table->string('company')->nullable();
             $table->text('other_data')->nullable();

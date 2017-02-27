@@ -7,7 +7,6 @@
         <div class="carousel-inner">
             <?php $i = 0; ?>
             @foreach($posts as $post)
-                    <?php dd($post->avatar()); ?>
                 @if($i%3 == 0)
                     <div class="item{{ $i == 0 ? ' active' : '' }}"><div class="container-custom"><div class="row">
                 @endif
@@ -26,7 +25,7 @@
                     </div>
                 </div>
 
-                @if($i%3 == 2){
+                @if($i%3 == 2)
                     </div></div></div>
                 @endif
                 <?php $i++; ?>

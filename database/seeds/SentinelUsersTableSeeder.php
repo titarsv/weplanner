@@ -128,7 +128,7 @@ class SentinelUsersTableSeeder extends Seeder {
             $contributorUserRole->users()->attach(Sentinel::registerAndActivate($user));
         }
 
-        for($i = 0; $i <= 50; $i++){
+        for($i = 0; $i < 50; $i++){
             $faker->seed($i);
             $user = [
                 'email'    => $faker->unique()->email,
@@ -139,7 +139,7 @@ class SentinelUsersTableSeeder extends Seeder {
                 ],
                 'first_name' => $faker->firstName($gender = null|'male'|'female'),
                 'last_name'  => $faker->lastName,
-                'image_id' => $faker->numberBetween(2, 8),
+                'image_id' => $faker->numberBetween(3, 8),
                 'login' => $faker->unique()->word
             ];
 
