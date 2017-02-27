@@ -110,13 +110,11 @@ elixir(function (mix) {
 
     // Объединяем скрипты
     mix.scripts([
+        'js/modernizr.custom.26633.js',
         'js/jquery-2.2.4.min.js',
         'js/bootstrap.min.js',
-        'js/jquery.bootgrid.fa.min.js',
-        'js/jquery.bootgrid.min.js',
         'js/jquery.gridrotator.js',
         'js/jquery-ui.min.js',
-        'js/modernizr.custom.26633.js',
         'js/main.js',
         'js/custom.js'
     ], 'public/js/main.min.js', res);

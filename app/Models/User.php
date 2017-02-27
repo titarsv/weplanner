@@ -71,6 +71,10 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
         return $this->hasMany('App\Models\File');
     }
 
+    public function avatar(){
+        return $this->hasOne('App\Models\File', 'id', 'image_id');
+    }
+
     /**
      * Получение списка желаний пользователя в виде массива id товаров или коллекции товаров
      * в зависимости от входящего аргумента

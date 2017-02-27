@@ -29,8 +29,8 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'key'   => 'about',
-                'value' => '',
-                'autoload'  => 0
+                'value' => 'Nulla sit amet mollis odio, vitae sodales diam. Suspendisse vehicula sapien ut pellentesque suscipit. Nullam eleifend efficitur nunc sit amet porttitor. Mauris eu nisl gravida, interdum lorem ut, finibus mi. Donec enim quam, ullamcorper at nisl a, congue dignissim nisi. Etiam condimentum ultrices orci vel volutpat.',
+                'autoload'  => 1
             ],
             [
                 'key'   => 'terms',

@@ -7,7 +7,7 @@
         <div class="carousel-inner">
             <?php $i = 0; ?>
             @foreach($posts as $post)
-
+                    <?php dd($post->avatar()); ?>
                 @if($i%3 == 0)
                     <div class="item{{ $i == 0 ? ' active' : '' }}"><div class="container-custom"><div class="row">
                 @endif
@@ -16,7 +16,7 @@
                     <div class="thumbnail">
                         <a href="/catalog/company/{{ $post->id }}/">
                             <div class="thumbnail-inner"></div>
-                            <img src="{{ $post->avatar }}" alt="">
+                            <img src="{{ $post->avatar->url() }}" alt="">
                             <div class="caption">
                                 <span>{{ $post->name }}</span>
                                 <div class="caption-heading">{{ $post->first_name }}</div>

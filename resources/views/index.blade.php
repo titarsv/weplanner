@@ -139,5 +139,7 @@
         @include('public.layouts.posts_slider', ['class' => 'new-providers', 'title' => 'New Providers', 'id' => 'providers-carousel', 'posts' => $providers, 'description' => 'Discover hundreds of popular providers recommended by <b>Wedding</b> <span>&amp;</span> <b>Event</b> Planner'])
         @include('public.layouts.providers_portfolio')
     </div>
+    @include('public.layouts.footer')
+    @include('public.layouts.footer-scripts')
 </body>
 </html>

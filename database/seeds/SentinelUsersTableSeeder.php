@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class SentinelUsersTableSeeder extends Seeder {
 
@@ -9,6 +10,7 @@ class SentinelUsersTableSeeder extends Seeder {
         DB::table('users')->truncate();
         DB::table('roles')->truncate();
         DB::table('role_users')->truncate();
+        $faker = Faker::create('ru_RU');
 
         $adminRole = Sentinel::getRoleRepository()->createModel()->create([
             'name' => 'Admin',
@@ -105,7 +107,8 @@ class SentinelUsersTableSeeder extends Seeder {
                     'contributor' => true
                 ],
                 'first_name' => 'Иван',
-                'last_name'  => 'Иванов'
+                'last_name'  => 'Иванов',
+                'image_id' => 2,
             ]
         ];
 
@@ -122,6 +125,24 @@ class SentinelUsersTableSeeder extends Seeder {
         }
         foreach ($contributors as $user)
         {
+            $contributorUserRole->users()->attach(Sentinel::registerAndActivate($user));
+        }
+
+        for($i = 0; $i <= 50; $i++){
+            $faker->seed($i);
+            $user = [
+                'email'    => $faker->unique()->email,
+                'phone'    => $faker->PhoneNumber,
+                'password' => 'pass',
+                'permissions' => [
+                    'contributor' => true
+                ],
+                'first_name' => $faker->firstName($gender = null|'male'|'female'),
+                'last_name'  => $faker->lastName,
+                'image_id' => $faker->numberBetween(2, 8),
+                'login' => $faker->unique()->word
+            ];
+
             $contributorUserRole->users()->attach(Sentinel::registerAndActivate($user));
         }
     }
