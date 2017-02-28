@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 @include('public.layouts.header')
-
-<body class="account-body{{ Request::path()=='/' ? ' home' : '' }}">
-    @include('public.layouts.header-main')
-    @include('public.layouts.nav')
-
-    @yield('breadcrumbs')
+<body>
+<div class="wrapper catalog">
+    @include('public.layouts.main_menu')
     @yield('content')
-    @include('public.layouts.footer')
-</main>
+</div>
+@include('public.layouts.footer')
 @include('public.layouts.footer-scripts')
 </body>
 </html>

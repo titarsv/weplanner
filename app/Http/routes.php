@@ -148,31 +148,25 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function(){
  */
 Route::group(['middlewareGroup' => ['web']], function() {
     Route::get('/', 'MainController@index');
-    Route::get('/page/{alias}', 'PagesController@show');
     Route::get('/about', function(){
         return view('public/about');
     });
     Route::get('/contacts', function(){
         return view('public/contacts');
     });
+    Route::get('/catalog', 'CategoriesController@all_categories');
     Route::get('/catalog/{alias}', 'CategoriesController@show');
-    Route::get('/brand/{alias}', 'CategoriesController@brand');
-    Route::get('/sale/', 'CategoriesController@sale');
-    Route::get('/unit/{alias}', 'UnitsController@show');
     Route::get('/news', 'ArticlesController@showAll');
     Route::get('/news/{alias}', 'ArticlesController@show');
     Route::match(['get', 'post'], '/search', ['as' => 'search', 'uses' => 'ProductsController@search']);
-    Route::get('/product/{alias}', 'ProductsController@show');
     Route::post('/review/add', 'ReviewsController@add');
     Route::post('/review/add-likes', 'ReviewsController@addLikes');
 
     /**
      * Authorization and account routing
      */
-    //Route::get('/login', 'LoginController@login');
     Route::post('/login', 'LoginController@authenticate');
     Route::get('/logout', 'LoginController@logout');
-//    Route::get('/registration', 'LoginController@register');
     Route::post('/registration', 'LoginController@store');
     Route::get('/forgotten', 'LoginController@forgotten');
     Route::post('/forgotten', 'LoginController@reminder');
@@ -192,19 +186,7 @@ Route::group(['middlewareGroup' => ['web']], function() {
     /**
      * Cart and checkout routing
      */
-    Route::post('cart/update','CartController@updateCart');
-    Route::post('cart/get','CartController@getCart');
-    Route::get('/checkout', 'CartController@show');
-    Route::post('checkout/delivery', 'CheckoutController@delivery');
-    Route::post('/checkout/cities', 'CheckoutController@getCities');
-    Route::post('/checkout/warehouses', 'CheckoutController@getWarehouses');
-//    Route::post('/checkout/confirm', 'CheckoutController@confirmOrder');
-    Route::get('/checkout/complete', 'CheckoutController@orderComplete');
-    Route::post('/order/create', 'CheckoutController@createOrder');
     Route::post('/subscribe', 'UserController@subscribe');
     Route::get('/livesearch', 'ProductsController@livesearch');
     Route::post('/recall', 'UserController@recall');
-    Route::post('/sale_price_request', 'PersonalSalesController@create');
 });
-
-

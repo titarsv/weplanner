@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribute;
-use App\Models\Module;
-use App\Models\ProductAttribute;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Image;
-use App\Models\Product;
-use App\Models\Unit;
+use App\Models\User;
 use App\Http\Requests;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -164,6 +160,14 @@ class CategoriesController extends Controller
             ->with('message-success', 'Категория ' . $category->name . ' успешно удалена.');
     }
 
+    public function all_categories(User $user){
+        return view('public.catalog', [
+            'partition' => 'home',
+            'popular' => $user->get_popular_contractors(),
+            'providers' => $user->get_new_contractors()
+        ]);
+    }
+
     /**
      * Каталог товаров
      *
@@ -267,120 +271,5 @@ class CategoriesController extends Controller
             //->with('viewed', $viewed)
             ->with('alias', $alias)
             ->with('current_cat', $current_cat);
-    }
-
-    /**
-     * Бренд
-     *
-     * @param $alias
-     * @param Request $request
-     * @param Category $categories
-     * @param Product $product
-     * @return $this
-     */
-    public function brand($alias, Request $request, Category $categories, Product $product)
-    {
-        $per_page = config('view.product_quantity');
-
-        $current_sort = $request->sort ? $request->sort : 'popularity';
-
-        $brands = $categories->where('name', $alias)->orderBy('sort_order')->get();
-        if (is_null($brands))
-            abort(404);
-
-        $categories = [];
-        $children_categories = [];
-        foreach ($brands as $brand){
-            $children_categories = array_merge($children_categories, $brand->children_ids());
-            $parents = $brand->parent()->get();
-            foreach ($parents as $parent){
-                if(!empty($parent->name)) {
-                    $name = $parent->name;
-                    break;
-                }
-            }
-            if(isset($name))
-                $categories[] = ['name' => $name, 'url_alias' => $brand->url_alias];
-        }
-
-        $products = $product->getProductsByCategory($children_categories, $current_sort);
-
-        // Пагинация
-        $paginator_options = [
-            'path'  => '/catalog/' . $alias,
-            'query' => [
-                'sort' => $current_sort
-            ]
-        ];
-
-        $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $current_page_products = $products->slice(($current_page - 1) * $per_page, $per_page)->all();
-        $products = new LengthAwarePaginator($current_page_products, count($products), $per_page, $current_page, $paginator_options);
-
-        if($request->json !== null) {
-            return view('public.layouts.products')->with('products', $products);
-        }else {
-
-            return view('public.brand')
-                ->with('brand', $brand)
-                ->with('categories', $categories)
-                ->with('products', $products)
-                ->with('current_sort', $current_sort)
-                ->with('alias', $alias);
-        }
-    }
-
-    /**
-     * Распродажа
-     *
-     * @param Request $request
-     * @param Product $product
-     * @return $this
-     */
-    public function sale(Request $request, Product $product, Image $image)
-    {
-        $per_page = config('view.product_quantity');
-
-        $products = $product->getSaleProducts();
-
-        // Пагинация
-        $pagination_options = [
-            'path'  => '/sale/'
-        ];
-
-        $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $current_page_products = $products->slice(($current_page - 1) * $per_page, $per_page)->all();
-        $products = new LengthAwarePaginator($current_page_products, count($products), $per_page, $current_page, $pagination_options);
-
-        if($request->json !== null) {
-            return view('public.layouts.sale-products')->with('products', $products);
-        }
-
-        $actions_settings = Module::where('alias_name', 'actions')->first();
-        $actions = [];
-        if (!empty($actions_settings)) {
-            $iterator = 0;
-            $image_ids = [];
-            $actions_settings = json_decode($actions_settings->settings);
-            foreach ($actions_settings->actions as $action){
-                $image_ids[] = $action->image_id;
-            }
-
-            $actions_images = $image->whereIn('id', $image_ids)->get();
-
-            foreach ($actions_settings->actions as $action) {
-                $iterator++;
-                $actions[] = [
-                    'image' => $actions_images->find((int)$action->image_id)->url('action'),
-                    'link'  => $action->link,
-                    'text'  => $action->text
-                ];
-                if ($iterator == $actions_settings->quantity) break;
-            }
-        }
-
-        return view('public.sale')
-            ->with('products', $products)
-            ->with('actions', $actions);
     }
 }
