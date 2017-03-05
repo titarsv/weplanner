@@ -10,7 +10,7 @@
                     <option value="">{{ trans('app.your_city') }}</option>
                     @foreach($settings->cities as $key => $city)
                         @if(!empty($city->$locale))
-                            <option value="{{ $key }}">{{ $city->$locale }}</option>
+                            <option value="{{ $key }}"{{ isset($city_id) && is_numeric($city_id) && $key == $city_id ? ' selected' : '' }}>{{ $city->$locale }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -28,8 +28,8 @@
             <div class="search-filter dropdown looking">
                 <select name="category" id="search_category" class="fancyselect hidden">
                     <option value="">{{ trans('app.who_are_you_looking_for') }}</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}"{{ is_object($category) && $cat->id == $category->id ? ' selected' : '' }}>{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>

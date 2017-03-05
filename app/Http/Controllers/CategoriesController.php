@@ -220,6 +220,7 @@ class CategoriesController extends Controller
             'current_sort' => $current_sort,
             'slug' => $slug,
             'services' => $category->services,
+            'city_id' => $request->city
         ]);
     }
 }

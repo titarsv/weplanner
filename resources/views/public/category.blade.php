@@ -12,7 +12,7 @@
             <h2 class="slogan">Your wedding planning adventure starts here! Beautiful details. Inspiring ideas. Real weddings.</h2>
         </div>
     </section>
-    @include('public.layouts.search-form')
+    @include('public.layouts.search-form', ['category' => $category])
     <section class="venues">
         <div class="container-custom">
             <header>
