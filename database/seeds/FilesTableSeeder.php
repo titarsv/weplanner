@@ -137,7 +137,7 @@ class FilesTableSeeder extends Seeder
             [
                 'user_id' => 5,
                 'href' => '4.png',
-                'title' => '.png',
+                'title' => '4.png',
                 'type' => 'png',
                 'parent_type' => '',
                 'parent_id' => 0,
@@ -336,6 +336,39 @@ class FilesTableSeeder extends Seeder
                 'user_id' => 5,
                 'href' => '22.png',
                 'title' => '22.png',
+                'type' => 'png',
+                'parent_type' => '',
+                'parent_id' => 0,
+                'data' => '[]',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'user_id' => 5,
+                'href' => 'bitmap-tavernetta.png',
+                'title' => 'bitmap-tavernetta.png',
+                'type' => 'png',
+                'parent_type' => '',
+                'parent_id' => 0,
+                'data' => '[]',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'user_id' => 5,
+                'href' => 'bitmap-tavernetta.png',
+                'title' => 'bitmap-tavernetta.png',
+                'type' => 'png',
+                'parent_type' => '',
+                'parent_id' => 0,
+                'data' => '[]',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'user_id' => 5,
+                'href' => 'bitmap-tavernetta.png',
+                'title' => 'bitmap-tavernetta.png',
                 'type' => 'png',
                 'parent_type' => '',
                 'parent_id' => 0,

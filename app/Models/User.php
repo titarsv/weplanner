@@ -114,6 +114,7 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
             })
             ->orderBy('users_data.rating', 'desc')
             ->take(12)
+            ->with('avatar')
             ->get();
 
 		return $contractors;
@@ -133,6 +134,7 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
             })
             ->orderBy('users.id', 'desc')
             ->take(12)
+            ->with('avatar')
             ->get();
 
         return $contractors;

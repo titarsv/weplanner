@@ -2,8 +2,8 @@
     <div class="container-custom">
         <div class="left-block">
             <div class="logo pull-left">
-                <a href="#">
-                    <img src="img/logo-black.png" alt="logo">
+                <a href="/">
+                    <img src="/img/logo-black.png" alt="logo">
                 </a>
             </div>
             <ul class="social black pull-right">
@@ -15,7 +15,7 @@
             </ul>
             <div class="clear"></div>
             <p>{{ $settings->about }}</p>
-            <div class="copy">Wedding &amp; EventPlanner.com Copyright &copy; 2015</div>
+            <div class="copy">Wedding &amp; EventPlanner.com Copyright &copy; {{ date('Y') }}</div>
         </div>
         <div class="right-block">
             <ul class="footer-nav">
@@ -26,13 +26,13 @@
                     <a href="#">ADVERTISERS</a>
                 </li>
                 <li>
-                    <a href="#">ABOUT US</a>
+                    <a href="/about">ABOUT US</a>
                 </li>
                 <li>
                     <a href="#">FEEDBACK</a>
                 </li>
                 <li>
-                    <a href="#">CONTACTS</a>
+                    <a href="/contacts">CONTACTS</a>
                 </li>
             </ul>
             <form action="#" class="subscribe-form">

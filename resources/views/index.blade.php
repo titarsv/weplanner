@@ -1,7 +1,6 @@
 @section('meta')
     <title>{!! $settings->meta_title !!}</title>
     <meta name="description" content="{!! $settings->meta_description !!}">
-    <meta name="keywords" content="{!! $settings->meta_keywords !!}">
 @endsection
 <!DOCTYPE html>
 <html>

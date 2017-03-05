@@ -7,11 +7,11 @@
         </div>
         <nav>
             <ul class="main-nav">
-                <li{{ isset($partition) && $partition == 'about' ? ' class="active"' : '' }}><a href="/about/">{{ trans('menu.about') }}</a></li>
-                <li{{ isset($partition) && $partition == 'catalog' ? ' class="active"' : '' }}><a href="/catalog/">{{ trans('menu.catalog') }}</a></li>
-                <li{{ isset($partition) && $partition == 'ideas' ? ' class="active"' : '' }}><a href="/ideas/">{{ trans('menu.ideas') }}</a></li>
-                <li{{ isset($partition) && $partition == 'news' ? ' class="active"' : '' }}><a href="/news/">{{ trans('menu.news') }}</a></li>
-                <li{{ isset($partition) && $partition == 'contacts' ? ' class="active"' : '' }}><a href="/contacts/">{{ trans('menu.contacts') }}</a></li>
+                <li{!! isset($partition) && $partition == 'about' ? ' class="active"' : '' !!}><a href="/about/">{{ trans('menu.about') }}</a></li>
+                <li{!! isset($partition) && $partition == 'catalog' ? ' class="active"' : '' !!}><a href="/catalog/">{{ trans('menu.catalog') }}</a></li>
+                <li{!! isset($partition) && $partition == 'ideas' ? ' class="active"' : '' !!}><a href="/ideas/">{{ trans('menu.ideas') }}</a></li>
+                <li{!! isset($partition) && $partition == 'news' ? ' class="active"' : '' !!}><a href="/news/">{{ trans('menu.news') }}</a></li>
+                <li{!! isset($partition) && $partition == 'contacts' ? ' class="active"' : '' !!}><a href="/contacts/">{{ trans('menu.contacts') }}</a></li>
             </ul>
         </nav>
         <ul class="profile">

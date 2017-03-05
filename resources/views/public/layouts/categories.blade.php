@@ -10,7 +10,7 @@
                 @endif
 
                 <li>
-                    <a href="/catalog/category/{{ $category->slug }}"><span class="categories-icon {{ $category->slug }}"></span>{{ $category->name }}</a>
+                    <a href="/catalog/{{ $category->slug }}"><span class="categories-icon {{ $category->slug }}"></span>{{ $category->name }}</a>
                 </li>
 
                 @if($i == 6)

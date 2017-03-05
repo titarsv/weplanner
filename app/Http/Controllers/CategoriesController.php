@@ -160,6 +160,12 @@ class CategoriesController extends Controller
             ->with('message-success', 'Категория ' . $category->name . ' успешно удалена.');
     }
 
+    /**
+     * Каталог
+     *
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function all_categories(User $user){
         return view('public.catalog', [
             'partition' => 'home',
@@ -169,107 +175,51 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Каталог товаров
+     * Категория
      *
-     * @param $alias
+     * @param $slug
      * @param Request $request
      * @param Category $categories
-     * @param Product $product
      * @return $this
      */
-    public function show($alias, Request $request, Category $categories, Product $product, Unit $unit)
+    public function show($slug, Request $request, Category $categories)
     {
-        $per_page = config('view.product_quantity');
+        if(!empty($request->category)) {
+            $category = $categories->where('id', $request->category)->first();
+            if(!is_null($category) && $category->slug != $slug){
+                //return redirect("catalog/$category->slug")->with('request', $request);
+                return redirect()->route("category", ['slug' => $category->slug, 'city' => $request->city, 'event' => $request->event]);
+            }
+        }else{
+            $category = $categories->where('slug', $slug)->first();
+        }
 
-        $sort_array = [
-            [
-                'value' => 'popularity',
-                'name' => 'популярности'
-            ],
-            [
-                'value' => 'date',
-                'name' => 'дате'
-            ],
-            [
-                'value' => 'name',
-                'name' => 'названию'
-            ]
-        ];
-
-        $current_sort = $request->sort ? $request->sort : 'popularity';
-
-        $category = $categories->where('url_alias', $alias)->first();
         if (is_null($category))
             abort(404);
 
-        $current_brand = null;
-        $models = null;
-        $current_model = null;
-        $units = null;
+        $filters = [];
 
-        if($category->parent_id == 0){
-            $current_category = $category;
-            $current_cat = $current_category;
-            $children_categories = $current_category->children_ids();
-        }else{
-            $parent_categories = array_reverse($category->get_parent_categories());
-            $current_category = $parent_categories[0];
-            $current_brand = $parent_categories[1];
-            $models = $current_brand->children;
-            if(isset($parent_categories[2])){
-                $current_model = $parent_categories[2];
-                $current_cat = $current_model;
-                $units = $current_model->units;
-                $children_categories = [$current_model->id];
-            }else {
-                $current_cat = end($parent_categories);
-                $children_categories = $current_cat->children_ids();
-            }
-        }
+        if(isset($request->city))
+            $filters[] = ['users_data.city', $request->city];
 
-        $brands = $current_category->children;
-
-        $products = $product->getProductsByCategory($children_categories, $current_sort);
-
-        // Пагинация
-        $paginator_options = [
-            'path'  => '/catalog/' . $alias,
-            'query' => [
-                'sort' => $current_sort
-            ]
+        $sort_array = [
+            'sort_rating',
+            'sort_name',
+            'sort_reviews',
+            'sort_price'
         ];
 
-        $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $current_page_products = $products->slice(($current_page - 1) * $per_page, $per_page)->all();
-        $products = new LengthAwarePaginator($current_page_products, count($products), $per_page, $current_page, $paginator_options);
+        $current_sort = $request->sort ? $request->sort : 'sort_rating';
 
-//        $viewed = json_decode($request->cookie('viewed'), true);
-//
-//        if(!is_null($viewed)) {
-//            $viewed = $product->getProducts($viewed);
-//        }
+        $contractors = $category->searchContractors($filters, $current_sort);
 
-        if($request->json !== null) {
-//            return response()->json([
-//                'current_page' => $products->currentPage(),
-//                'pages_count' => $products->lastPage(),
-//                'products' => view('public.layouts.products')->with('products', $products)
-//            ]);
-            return view('public.layouts.products')->with('products', $products);
-        }
-
-        return view('public.catalog')
-            ->with('category', $current_category)
-            ->with('brands', $brands)
-            ->with('current_brand', $current_brand)
-            ->with('models', $models)
-            ->with('current_model', $current_model)
-            ->with('products', $products)
-            ->with('sort_array', $sort_array)
-            ->with('current_sort', $current_sort)
-            ->with('units', $units)
-            //->with('viewed', $viewed)
-            ->with('alias', $alias)
-            ->with('current_cat', $current_cat);
+        return view('public.category', [
+            'category' => $category,
+            'contractors' => $contractors,
+            'sort_array' =>  $sort_array,
+            'current_sort' => $current_sort,
+            'slug' => $slug,
+            'services' => $category->services,
+        ]);
     }
 }

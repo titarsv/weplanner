@@ -20,7 +20,7 @@ Route::get('setlocale/{locale}', function ($locale) {
         Session::put('locale', $locale);                    # И устанавливаем его в сессии под именем locale
     }
 
-    return redirect()->back();                              # Редиректим его <s>взад</s> на ту же страницу
+    return redirect()->back();                              # Редиректим его взад на ту же страницу
 
 });
 
@@ -155,9 +155,10 @@ Route::group(['middlewareGroup' => ['web']], function() {
         return view('public/contacts');
     });
     Route::get('/catalog', 'CategoriesController@all_categories');
-    Route::get('/catalog/{alias}', 'CategoriesController@show');
+    Route::get('/catalog/{slug}', ['as' => 'category', 'uses' => 'CategoriesController@show']);
+    Route::get('/catalog/company/{id}', 'UserController@company');
     Route::get('/news', 'ArticlesController@showAll');
-    Route::get('/news/{alias}', 'ArticlesController@show');
+    Route::get('/news/{slug}', 'ArticlesController@show');
     Route::match(['get', 'post'], '/search', ['as' => 'search', 'uses' => 'ProductsController@search']);
     Route::post('/review/add', 'ReviewsController@add');
     Route::post('/review/add-likes', 'ReviewsController@addLikes');

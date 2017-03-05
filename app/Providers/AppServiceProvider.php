@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App;
+use Config;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
@@ -62,17 +64,23 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer([
             'public/*', 'users/*', 'index', 'login', 'register'
-        ], function($view) use ($settings, $user) {
+        ], function($view) use ($settings) {
+            $raw_locale = Session::get('locale');
+            if (in_array($raw_locale, Config::get('app.locales'))) {
+                $locale = $raw_locale;
+            }
+            else $locale = Config::get('app.locale');
 
             $view->with([
-                'settings' => $settings
+                'settings' => $settings,
+                'locale'   => $locale
             ]);
         });
 
         /**
          * Категории
          */
-        view()->composer(['public.layouts.categories'], function($view){
+        view()->composer(['public.layouts.categories', 'public.layouts.search-form', 'public.category'], function($view){
             $categories = new Category();
             $view->with([
                 'categories' => $categories->get_parent_categories()

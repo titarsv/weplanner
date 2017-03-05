@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
@@ -22,7 +23,12 @@ class Setting extends Model
      * @return array
      */
     public function get_global(){
-        return $this->convert_to_array($this->where('autoload', true)->get());
+        $settings = Cache::remember('global_settings', 120, function()
+        {
+            return $this->convert_to_array($this->where('autoload', true)->get());
+        });
+
+        return $settings;
     }
 
     /**

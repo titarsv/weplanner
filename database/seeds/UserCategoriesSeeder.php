@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class UserCategoriesSeeder extends Seeder
 {
@@ -11,11 +12,15 @@ class UserCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        Db::table('user_categories')->insert([
-            [
-                'user_id' => 1,
-                'category_id' => 2
-            ],
-        ]);
+        $faker = Faker::create('ru_RU');
+
+        for($i = 1; $i <= 55; $i++) {
+            Db::table('user_categories')->insert([
+                [
+                    'user_id' => $i,
+                    'category_id' => $faker->numberBetween(1, 2)
+                ],
+            ]);
+        }
     }
 }

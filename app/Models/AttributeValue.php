@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 class AttributeValue extends Model
 {
@@ -20,5 +21,14 @@ class AttributeValue extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'user_attributes');
+    }
+
+    public function getNameAttribute($value){
+        $locale = App::getLocale();
+
+        if(isset($this->attributes["name_$locale"]))
+            return $this->attributes["name_$locale"];
+        else
+            return $value;
     }
 }

@@ -144,6 +144,7 @@ class UserController extends Controller
             'orders' => $orders
         ]);
     }
+
     /**
      * Сохранение отредактированных личных данных в БД
      *
@@ -382,6 +383,26 @@ class UserController extends Controller
         });
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * Публичная страница пользователя
+     *
+     * @param Request $request
+     * @param User $users
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function company(Request $request, User $users, $id){
+        $user = $users->find($id);
+
+        return view('public.personal_page', [
+            'partition' => 'catalog',
+            'user'      => $user,
+            'gallery'   => $user->user_data->gallery,
+            'category'  => $user->categories()->first(),
+            'attributes'  => $user->attributes()->groupBy('id')->with('attribute')->get()->groupBy('attribute.name')
+        ]);
     }
 
 }

@@ -1,9 +1,50 @@
-<div class="search-block">
-    <form action="{{ !empty($action) ? $action : '/search' }}" method="get">
-        <input name="search" class="search" type="text" placeholder="Поиск">
-        <button class="search_btn">Поиск</button>
-        {{--<div class="search-example-block">--}}
-            {{--например: <span class="search-example">косилка для мтз</span>--}}
-        {{--</div>--}}
+<section id="search-prov" class="search-prov">
+    <h2>Search over 10 000 providers in over 10 countries</h2>
+    <form action="">
+        <div class="container-custom">
+            <div class="filter-menu-btn">
+                <a href="#"></a>
+            </div>
+            <div class="search-filter dropdown city">
+                <select name="city" id="search_city" class="fancyselect hidden">
+                    <option value="">{{ trans('app.your_city') }}</option>
+                    @foreach($settings->cities as $key => $city)
+                        @if(!empty($city->$locale))
+                            <option value="{{ $key }}">{{ $city->$locale }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="search-filter dropdown you-event">
+                <select name="event" id="search_event" class="fancyselect hidden">
+                    <option value="">{{ trans('app.your_event') }}</option>
+                    @foreach($settings->events as $key => $event)
+                        @if(!empty($event->$locale))
+                            <option value="{{ $key }}">{{ $event->$locale }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="search-filter dropdown looking">
+                <select name="category" id="search_category" class="fancyselect hidden">
+                    <option value="">{{ trans('app.who_are_you_looking_for') }}</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="search-filter dropdown date">
+                <a data-toggle="dropdown" href="#">{{ trans('app.date') }}</a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a href="#">Date</a></li>
+                    <li><a href="#">Date</a></li>
+                    <li><a href="#">Date</a></li>
+                </ul>
+            </div>
+            <div class="search">
+                <button type="submit">{{ trans('app.search') }}</button>
+            </div>
+            <div class="clear"></div>
+        </div>
     </form>
-</div>
+</section>

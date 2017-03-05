@@ -66,6 +66,28 @@ class SettingsTableSeeder extends Seeder
                     'youtube'   => '',
                 ]),
                 'autoload'  => 0
+            ],
+            [
+                'key'   => 'countries',
+                'value' => json_encode([['ru' => 'Украина',  'en' => 'Ukraine']]),
+                'autoload'  => 1
+            ],
+            [
+                'key'   => 'cities',
+                'value' => json_encode([['ru' => 'Харьков',  'en' => 'Kharkov'], ['ru' => 'Киев',  'en' => 'Kiev'], ['ru' => 'Львов',  'en' => 'Lvov']]),
+                'autoload'  => 1
+            ],
+            [
+                'key'   => 'events',
+                'value' => json_encode([
+                    ['ru' => 'Свадьба',  'en' => 'Wedding'],
+                    ['ru' => 'День рождения',  'en' => 'Birthday'],
+                    ['ru' => 'Корпоратив',  'en' => 'Corporate'],
+                    ['ru' => 'Выпускной',  'en' => 'High school graduation'],
+                    ['ru' => 'Утренник',  'en' => 'Matinee'],
+                    ['ru' => 'Похорона',  'en' => 'Bury']
+                ]),
+                'autoload'  => 1
             ]
         ]);
     }

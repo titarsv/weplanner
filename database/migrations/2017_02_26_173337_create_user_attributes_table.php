@@ -15,6 +15,7 @@ class CreateUserAttributesTable extends Migration
         Schema::create('user_attributes', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('attribute_value_id');
+            $table->string('price');
         });
     }
 

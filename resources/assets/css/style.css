@@ -570,6 +570,14 @@ section.new-providers{
     border: solid 1px #979797;
     display: none;
 }
+.hover-caption .info{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    padding: 0 21px 25px;
+    word-wrap: break-word;
+}
 .hover-caption .caption-heading{
     color: #000;
     font-size: 24px;
@@ -1307,11 +1315,14 @@ section.search-prov{
     border-radius: 0 2px 2px 0;
     width: 14%;
 }
-.search-prov .search > a{
+.search-prov .search > button{
     display: block;
     color: #fff;
     font-size: 16px;
     text-align: center;
+    width: 100%;
+    border: none;
+    background: transparent;
 }
 section.sign{
     padding-top: 60px;
@@ -1497,7 +1508,7 @@ section.venues{
     background-color: transparent;
     border: none;
 }
-.pagination > li > a{
+.pagination > li > a, .pagination > li > span{
     margin: 0 5px;
     color: #ea4848;
     border-radius: 2px;
@@ -1508,12 +1519,12 @@ section.venues{
 .pagination > li > a:active{
     color: rgba(0, 0, 0, 0.87);
 }
-.pagination>li:first-child>a{
+.pagination>li:first-child>a, .pagination>li:first-child>span{
     margin-left: 0;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
-.pagination>li:last-child>a{
+.pagination>li:last-child>a, .pagination>li:last-child>span{
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }

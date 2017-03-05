@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent');
             $table->integer('count');
             $table->string('currency');
+            $table->string('currency_en');
         });
     }
 

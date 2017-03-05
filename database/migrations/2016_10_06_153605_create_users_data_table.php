@@ -15,8 +15,12 @@ class CreateUsersDataTable extends Migration
         Schema::create('users_data', function(Blueprint $table){
             $table->increments('id');
             $table->integer('user_id');
-            $table->text('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
             $table->string('company')->nullable();
+            $table->float('average_bill')->nullable();
+            $table->string('preview')->nullable();
             $table->text('other_data')->nullable();
             $table->text('wishlist')->nullable();
             $table->integer('rating');

@@ -1,111 +1,89 @@
-@extends('public.layouts.main')
+@extends('public.layouts.main', ['partition' => 'contacts', 'wrapper_class' => 'contacts-page'])
 @section('meta')
-    <title>Контакты</title>
-    <meta name="description" content="Контакты">
-    <meta name="keywords" content="Контакты">
-@endsection
-
-@section('breadcrumbs')
-    {!! Breadcrumbs::render('contacts') !!}
+    <title>Контакты Weplanner</title>
+    <meta name="description" content="Контакты Weplanner">
 @endsection
 
 @section('content')
-    <section class="main-content">
-        <div class="container">
-
-            <div class="main-sidebar absolute">
-                <div class="filters">
-
-                    @include('public.layouts.sidebar-menu')
-
-                </div>
-            </div>
-
-            <div class="main-wrapper">
-                @include('public.layouts.search-form')
-            </div>
-
-            <div class="contacts-block">
-                <span class="contacts-title">Контакты</span>
-                <div class="contacts-sidebar">
-                    <span class="contacts-sidebar_title">Служба поддержки магазина ВерxАгро</span>
-                    <div class="contacts-sidebar_schedule">
-                        <span class="contacts-sidebar_subtitle">Режим работы:</span>
-                        <div class="contacts-sidebar_schedule-days">
-                            ПН-ПТ С 9.00 - 19.00
+    <section class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.29709497923!2d36.23446391571533!3d50.00578647941652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4127a0de6da556e3%3A0xd35868884dfd4986!2z0LLRg9C70LjRhtGPINCh0YPQvNGB0YzQutCwLCA3Miwg0KXQsNGA0LrRltCyLCDQpdCw0YDQutGW0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNjEwMDA!5e0!3m2!1sru!2sua!4v1475833593887" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </section>
+    <section class="contacts">
+        <div class="container-custom">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-block">
+                        <div class="icon-block ">
+                            <span class="addres"></span>
                         </div>
-                        <span class="contacts-sidebar_subtitle">По вопросам сотрудничества:</span>
-                        <ul class="contacts-sidebar_phones">
-                            <li class="contacts-sidebar_phones-item">(800) 500 32 11</li>
-                            <li class="contacts-sidebar_phones-item">(057) 987 32 11</li>
-                            <li class="contacts-sidebar_phones-item">(097) 321 32 11</li>
-                        </ul>
-                        <div class="contacts-sidebar_mail">
-                            partner@verhagro.com
-                        </div>
-                        <div class="contacts-sidebar_address">
-                            г. Харьков ул. Дудинськой, 6
-                        </div>
-                    </div>
-                    <div class="contacts-sidebar_boss-about">
-                        <div class="contacts-sidebar_boss-pic_wrapper">
-                            <img src="/img/boss-pic.jpg" alt="" class="contacts-sidebar_boss-pic">
-                        </div>
-                        <div class="contacts-sidebar_boss-info_wrapper">
-                            <span class="contacts-sidebar_boss-position">Начальник <br>отдела сотрудничества</span>
-                            <span class="contacts-sidebar_boss-name">Иван Петров</span>
+                        <div class="contact">
+                            <h3>Our Address</h3>
+                            <p>Kharkiv, Ukraine</p>
+                            <p>Sumska str., 72</p>
                         </div>
                     </div>
                 </div>
-                <div class="contacts-main_wrapper">
-                    <div id="map" class="map"></div>
-                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4r17-pvaW17xB0yfuZmXPf4uxfMJLmk"></script>
-
-                    <script type="text/javascript">
-                        function initMap() {
-                            // Координаты центра на карте.
-                            var centerLatLng = new google.maps.LatLng(49.979446, 36.176915);
-
-                            // Обязательные опции с которыми будет проинициализированна карта
-                            var mapOptions = {
-                                center: centerLatLng, // Координаты центра мы берем из переменной centerLatLng
-                                scrollwheel: false,		// Отключение увеличения при скроллинге
-                                zoom: 18,               // Зум по умолчанию. Возможные значения от 0 до 21
-                                mapTypeControl: false,
-                                streetViewControl: false,
-                                rotateControl: false
-                            };
-
-                            // Создаем карту внутри элемента #map
-                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-                            var marker = new google.maps.Marker({
-                                position: centerLatLng,
-                                map: map
-                            });
-                        }
-
-                        // Ждем полной загрузки страницы, после этого запускаем initMap()
-                        google.maps.event.addDomListener(window, "load", initMap);
-
-                    </script>
+                <div class="col-md-4">
+                    <div class="contact-block">
+                        <div class="icon-block">
+                            <span class="tel"></span>
+                        </div>
+                        <div class="contact">
+                            <h3>Our Address</h3>
+                            <p>Office: +38 (057) 123-45-67</p>
+                            <p>Mob.: +38 (095) 765-43-21</p>
+                            <p>Mob.: +38 (067) 543-12-76</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-block">
+                        <div class="icon-block">
+                            <span class="online"></span>
+                        </div>
+                        <div class="contact">
+                            <h3>Connect Online</h3>
+                            <p>Email: <a href="mailto:hello@weplaner.com">hello@weplaner.com</a></p>
+                            <ul class="social black">
+                                <li><a class="fb" href="#"></a></li>
+                                <li><a class="vk" href="#"></a></li>
+                                <li><a class="in" href="#"></a></li>
+                                <li><a class="insta" href="#"></a></li>
+                                <li><a class="pt" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="feedback-block">
-                <span class="feedback-title">Отправить сообщение</span>
-                <form method="post" class="feedback-form">
-                    <div class="feedback-form_wrapper left">
-                        <input class="feedback-form_input" type="text" name="email" placeholder="E-mail">
-                        <input class="feedback-form_input" type="text" name="name" placeholder="Имя">
-                    </div>
-                    <div class="feedback-form_wrapper">
-                        <textarea class="feedback-form_textarea" placeholder="Сообщение"></textarea>
-                    </div>
-                    <button class="feedback-button">Отправить</button>
-                </form>
-            </div>
-
         </div>
+    </section>
+    <section class="write-us">
+        <h2>Drop us a line just now</h2>
+        <div class="section-desc">You can write ypu letter for <b>Wedding</b> <span>&amp;</span> <b>Event</b> by form below.</div>
+        <form action="" method="post">
+            <div class="row p-bot">
+                <div class="col-md-12">
+                    <input class="op-place name" type="text" placeholder="Your Name" name="name">
+                </div>
+            </div>
+            <div class="row p-bot">
+                <div class="col-md-6">
+                    <input class="op-place email" type="text" placeholder="Email Address" name="email">
+                </div>
+                <div class="col-md-6">
+                    <input class="op-place phone" type="text" placeholder="Phone Number" name="phone">
+                </div>
+            </div>
+            <div class="row p-bot">
+                <div class="col-md-12">
+                    <textarea placeholder="Your Message" name="message"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="send" type="submit">Send Message</button>
+                </div>
+            </div>
+        </form>
     </section>
 @endsection

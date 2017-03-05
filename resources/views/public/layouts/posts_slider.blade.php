@@ -10,7 +10,6 @@
                 @if($i%3 == 0)
                     <div class="item{{ $i == 0 ? ' active' : '' }}"><div class="container-custom"><div class="row">
                 @endif
-
                 <div class="col-md-4">
                     <div class="thumbnail">
                         <a href="/catalog/company/{{ $post->id }}/">
@@ -19,7 +18,7 @@
                             <div class="caption">
                                 <span>{{ $post->name }}</span>
                                 <div class="caption-heading">{{ $post->first_name }}</div>
-                                {!! empty($post->page_brief) ? '<p></p>' : $post->page_brief !!}
+                                <p>{{ empty($post->preview) ? '' : $post->preview }}</p>
                             </div>
                         </a>
                     </div>

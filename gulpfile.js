@@ -113,6 +113,7 @@ elixir(function (mix) {
         'js/modernizr.custom.26633.js',
         'js/jquery-2.2.4.min.js',
         'js/bootstrap.min.js',
+        'js/fancySelect.js',
         'js/jquery.gridrotator.js',
         'js/jquery-ui.min.js',
         'js/main.js',
